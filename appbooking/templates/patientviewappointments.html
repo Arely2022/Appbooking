@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include 'include.html' %}
+    {% load static %}
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1/qrcode.min.js"></script>
+</head>
+
+<body>
+    {% include 'adminnav.html' %}
+    <div id="wrapper">
+        {% include 'patient_nav.html' %}
+        <div class="page-content-wrapper">
+            <div class="container-fluid"><a class="btn btn-link" role="button" id="menu-toggle" href="#menu-toggle"><i class="fa fa-bars"></i></a>
+                <h2 class="text-center">CITAS PROXIMAS</h2>
+                <div class="text-center" role="tablist" id="accordion-1">
+                    {% for i in upcomming_appointments %}
+                    <ul class = "collapsible popout text-center" data-collapsible = "accordion">
+                        <li class="card">
+                            <div class = "card-header collapsible-header">
+                                <h5 style="color:blue;"><a><i class="fa fa-calendar-check-o"></i>  {{ i.patientname }} appointment with {{ i.doctorname }} on {{i.appointmentdate}}</a></h5>
+                            </div>
+                            <div class = "card-body collapsible-body">
+                                <table align="center" class="card-text" style="font-size: 19px;">
+                                    <tr>
+                                        <td>Doctor:</td>
+                                        <td>{{i.doctorname}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PacientE:</td>
+                                        <td>{{i.patientname}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fecha:</td>
+                                        <td>{{i.appointmentdate}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hora:</td>
+                                        <td>{{i.appointmenttime}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sintomas:</td>
+                                        <td>{{i.symptomps}}</td>
+                                    </tr> 
+                                    <tr>
+                                        <td></td>
+                                        <td><a href="{% url 'patient_delete_appointment' i.id %}" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger">Delete</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Más detalles:</td>
+                                        <td><a href="{% url 'viewappointment' i.id %}" class="btn btn-primary">Ver</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><button class="btn btn-light submit-button" type="button" id="generateQRCode{{ i.id }}" data-appointment-id="{{ i.id }}">Generar QR de cita</button>
+                                            <div id="qrcode{{ i.id }}" style="width:160px; height:160px; margin-top:15px;"></div>
+                                        </td>
+                                    </tr>
+                                    <script type="text/javascript">
+                                        document.getElementById('generateQRCode{{ i.id }}').addEventListener('click', function() {
+                                            var qrContainer = document.getElementById('qrcode{{ i.id }}');
+                                            qrContainer.innerHTML = "";  // Clear previous QR code if any
+                                            var appointmentUrl = "{% url 'viewappointment' i.id %}"; // Django template to generate the URL
+                                            var qrCode = new QRCode(qrContainer, {
+                                                text: "http://127.0.0.1:8000/"+appointmentUrl,  // Use URL with specific appointment ID
+                                                width: 160,
+                                                height: 160,
+                                                colorDark : "#000000",
+                                                colorLight : "#ffffff",
+                                                correctLevel : QRCode.CorrectLevel.H
+                                            });
+                                        });
+                                    </script>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                    {% endfor %}
+                </div>
+                <h2 class="text-center">CITAS PREVIAS</h2>
+                <div class="text-center" role="tablist" id="accordion-2">
+                    {% for j in previous_appointments %}
+                    <ul class = "collapsible popout text-center" data-collapsible = "accordion">
+                        <li class="card">
+                            <div class = "card-header collapsible-header">
+                                <h5 style="color:blue;"><a><i class="fa fa-calendar-check-o"></i>  {{ j.patientname }} appointment with {{ j.doctorname }} on {{j.appointmentdate}}</a></h5>
+                            </div>
+                            <div class = "card-body collapsible-body">
+                                <table align="center" class="card-text" style="font-size: 19px;">
+                                    <tr>
+                                        <td>Doctor:</td>
+                                        <td>{{j.doctorname}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Paciente:</td>
+                                        <td>{{j.patientname}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fecha:</td>
+                                        <td>{{j.appointmentdate}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hora:</td>
+                                        <td>{{j.appointmenttime}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sintomas:</td>
+                                        <td>{{j.symptomps}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Seguimiento:</td>
+                                        <td>{{j.prescription}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span></div>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/back-to-top-scroll.js' %}"></script>
+<script src="{% static 'js/Bold-BS4-Animated-Back-To-Top.js' %}"></script>
+<script src="{% static 'js/bs-init.js' %}"></script>
+<script src="{% static 'js/Sidebar-Menu.js' %}"></script>
+
+</body>
+
+</html>

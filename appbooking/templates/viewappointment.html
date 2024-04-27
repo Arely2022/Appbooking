@@ -1,0 +1,54 @@
+{% include 'include.html' %}
+{% load static %}
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1/qrcode.min.js"></script>
+<form class="custom-form" method="post">
+    {% csrf_token %}
+    <h1 style="margin-top: 0px;">Cita</h1>
+    <h2>Hola {{appointment.patientname}}</h2>
+    <div class="form-row form-group">
+        <div class="col-sm-4 label-column">
+            <label class="col-form-label" for="name-input-field">Nombre del doctor y Especialidad</label>
+        </div>
+        <div class="col-sm-6 input-column">
+            <select class="form-control" name="doctoremail">
+                {% for d in alldoctors %}
+                <option value="{{d.email}}" {% if appointment.doctoremail == d.email %}selected{% endif %}>{{d.name}} - {{d.specialization}} - {{d.email}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-row form-group">
+        <div class="col-sm-4 label-column"><label class="col-form-label" for="pawssword-input-field">Nombre del Paciente</label></div>
+        <div class="col-sm-6 input-column">
+            <input class="form-control" type="text" value="{{appointment.patientname}}" name="patientname">
+        </div>
+    </div>
+    <div class="form-row form-group">
+        <div class="col-sm-4 label-column"><label class="col-form-label" for="pawssword-input-field">Email</label></div>
+        <div class="col-sm-6 input-column">
+            <input class="form-control" type="text" value="{{appointment.patientemail}}" name="patientemail">
+        </div>
+    </div>
+    <div class="form-row form-group">
+        <div class="col-sm-4 label-column"><label class="col-form-label" for="repeat-pawssword-input-field">Fecha</label></div>
+        <div class="col-sm-6 input-column">
+            <input class="form-control" type="date" name="appointmentdate" value="{{appointment.appointmentdate|date:'Y-m-d'}}" required="">
+        </div>
+    </div>
+    <div class="form-row form-group">
+        <div class="col-sm-4 label-column"><label class="col-form-label" for="repeat-pawssword-input-field">Hora</label></div>
+        <div class="col-sm-6 input-column">
+            <input class="form-control" type="time" value="{{appointment.appointmenttime|time:'H:i'}}" name="appointmenttime" required="">
+        </div>
+    </div>
+    <div class="form-row form-group">
+        <div class="col-sm-4 label-column"><label class="col-form-label" for="repeat-pawssword-input-field">Sintomas</label></div>
+        <div class="col-sm-6 input-column">
+            <textarea class="form-control" name="symptoms" required="">{{appointment.symptomps}}</textarea>
+        </div>
+    </div>
+
+</form>
+
+
+

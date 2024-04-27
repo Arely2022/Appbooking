@@ -1,0 +1,14 @@
+{% include 'include.html' %}
+{% include 'navbar.html' %}
+{% block body %}
+
+<section class="general-area-home">
+        <h1>Centro Médico VidaPlena</h1>
+        <h3>Conoce los servicios disponibles y agenda tu consulta en cualquier momento</h3>
+        <div class="row" id="row1">
+            <div class="col offset-lg-0">
+                <h2>Crea tu perfil para realizar una consulta</h2><a class="btn btn-primary" href="{% url 'createaccountpage' %}">Crear perfil</a>
+            </div>
+        </div>
+</section>
+{% endblock %}

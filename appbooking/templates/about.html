@@ -1,0 +1,81 @@
+{% include 'include.html' %}
+{% include 'navbar.html' %}
+{% block body %}
+
+<style>
+    /* Container holding the image and text */
+    .container {
+        display: flex;              /* Enables Flexbox */
+        align-items: center;        /* Align items vertically in the center */
+        justify-content: flex-start;/* Align items horizontally at the start */
+        gap: 20px;                  /* Space between the image and text */
+        margin: 20px;               /* Margin around the container */
+    }
+
+    /* Style for the image */
+    .image {
+        flex-shrink: 0;             /* Prevents the image from shrinking */
+        width: 200px;               /* Fixed width */
+        height: auto;               /* Maintain aspect ratio */
+    }
+
+    /* Style for the text */
+    .text {
+        flex-grow: 1;               /* Allows text to take up any extra space */
+        font-size: 16px;            /* Font size of the text */
+    }
+</style>
+
+<h1 class="text-center">Servicios</h1>
+<p class="text-justify" id="about-p">Conoce al equipo</p>
+
+<div class="container">
+    <img class="image" src="your-image-url.jpg" alt="Pediatra: Dr. Marco Santillán">
+    <div class="text">
+        <h4>Pediatra: Dr. Marco Santillán</h4>
+        <p>Dr. Marco Santillán es un pediatra apasionado por el bienestar y desarrollo infantil. Graduado de la Universidad Nacional con honores, ha dedicado más de 15 años a la atención pediátrica integral. Es experto en nutrición infantil y desarrollo temprano, y se compromete a proporcionar una atención excepcional a cada uno de sus pequeños pacientes y sus familias.</p>
+    </div>
+</div>
+
+<div class="container">
+    <img class="image" src="your-image-url.jpg" alt="Cardióloga: Dra. Ana María Fuentes">
+    <div class="text">
+        <h4>Cardióloga: Dra. Ana María Fuentes</h4>
+        <p>La Dra. Ana María Fuentes es una cardióloga con especialización en enfermedades coronarias y electrocardiografía. Graduada de la Universidad de Santiago de Chile, ha contribuido significativamente a la prevención de enfermedades cardíacas a través de la educación y la intervención médica. La Dra. Fuentes es conocida por su dedicación y cuidado meticuloso en el tratamiento de sus pacientes.</p>
+    </div>
+</div>
+
+<div class="container">
+    <img class="image" src="your-image-url.jpg" alt="Pediatra: Dr. Marco Santillán">
+    <div class="text">
+        <h4>Oftalmóloga: Dra. Teresa Gómez</h4>
+        <p>La Dra. Teresa Gómez es una oftalmóloga con una vasta experiencia en el diagnóstico y tratamiento de trastornos visuales. Formada en la Universidad de Harvard, se especializa en cirugía refractiva y gestión de enfermedades oculares crónicas. Su compromiso con la excelencia y la innovación en cuidado ocular garantiza los mejores resultados para sus pacientes.</p>
+    </div>
+</div>
+
+<div class="container">
+    <img class="image" src="your-image-url.jpg" alt="Pediatra: Dr. Marco Santillán">
+    <div class="text">
+        <h4>Endocrinóloga: Dra. Elena Ríos</h4>
+        <p>La Dra. Elena Ríos es una endocrinóloga destacada, experta en trastornos hormonales y metabólicos. Graduada de la Universidad de México, tiene una profunda dedicación al tratamiento de la diabetes y enfermedades tiroideas. A través de un enfoque personalizado y basado en la última investigación, la Dra. Ríos se esfuerza por mejorar la calidad de vida de sus pacientes.</p>
+    </div>
+</div>
+
+<div class="container">
+    <img class="image" src="your-image-url.jpg" alt="Pediatra: Dr. Marco Santillán">
+    <div class="text">
+        <h4>Ginecóloga: Dra. Claudia Velasco</h4>
+        <p>La Dra. Claudia Velasco es una distinguida ginecóloga con una trayectoria dedicada a la salud femenina. Formada en la Universidad de Barcelona, se especializa en salud reproductiva y menopausia. Con más de 20 años de experiencia, la Dra. Velasco ofrece un enfoque empático y actualizado, asegurando que cada paciente reciba el cuidado más completo y respetuoso.</p>
+    </div>
+</div>
+
+<div class="container">
+    <img class="image" src="your-image-url.jpg" alt="Pediatra: Dr. Marco Santillán">
+    <div class="text">
+        <h4>Psicólogo: Dr. Carlos Méndez</h4>
+        <p>El Dr. Samuel Rojas es un psicólogo clínico con un enfoque en terapia cognitivo-conductual. Obtuvo su doctorado en la Universidad de Chicago y ha trabajado extensamente en el tratamiento de trastornos de ansiedad y depresión. Con una práctica basada en la evidencia, el Dr. Rojas ayuda a sus pacientes a superar sus desafíos emocionales y psicológicos de una manera comprensiva y efectiva.</p>
+    </div>
+</div>
+
+<div class="scroll-top-wrapper"><span class="scroll-top-inner"><i class="fa fa-arrow-circle-up"></i></span></div>
+{% endblock %}
