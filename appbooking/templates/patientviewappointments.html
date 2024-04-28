@@ -60,9 +60,17 @@
                                         document.getElementById('generateQRCode{{ i.id }}').addEventListener('click', function() {
                                             var qrContainer = document.getElementById('qrcode{{ i.id }}');
                                             qrContainer.innerHTML = "";  // Clear previous QR code if any
+
+                                            // Get the base URL dynamically
+                                            var baseUrl = window.location.protocol + '//' + window.location.host;
+
                                             var appointmentUrl = "{% url 'viewappointment' i.id %}"; // Django template to generate the URL
+
+                                            // Combine the base URL with the appointment URL
+                                            var fullUrl = baseUrl + '/' + appointmentUrl;
+
                                             var qrCode = new QRCode(qrContainer, {
-                                                text: "http://127.0.0.1:8000/"+appointmentUrl,  // Use URL with specific appointment ID
+                                                text: fullUrl,  // Use dynamic URL with specific appointment ID
                                                 width: 160,
                                                 height: 160,
                                                 colorDark : "#000000",
