@@ -182,13 +182,12 @@ def adminaddReceptionist(request):
         try:
             if password == repeatpassword:
                 Recepcionist.objects.create(name=name,email=email,password=password,gender=gender,phonenumber=phonenumber,address=address,birthdate=birthdate,bloodgroup=bloodgroup)
-                user = User.objects.create_user(first_name=name,email=email,password=password,username=email)
-                rec_group = Group.objects.get_or_create(name='Receptionist')
-                rec_group.user_set.add(user)
-
+                user=User.objects.create_user(first_name=name,email=email,password=password,username=email)
+                doc_group, created = Group.objects.get_or_create(name='Receptionist')
+                doc_group.user_set.add(user)
                 user.save()
+                error="no"
 
-                error = "no"
             else:
                 error = "yes"
         except:
@@ -328,13 +327,13 @@ def viewappointments(request):
 
             d={"upcomming_appointments":upcomming_appointments, "previous_appointments":previous_appointments} 
             return render(request,'doctorviewappointment.html',d)
-        elif g=='REceptionist':
+        elif g=='Receptionist':
             upcomming_appointments=Appointment.objects.filter(appointmentdate__gte=timezone.now(),status=True).order_by('appointmentdate')
             
             previous_appointments=Appointment.objects.filter(appointmentdate__lt=timezone.now()).order_by('-appointmentdate') | Appointment.objects.filter(status=False).order_by('-appointmentdate')
 
             d={"upcomming_appointments":upcomming_appointments,"previous_appointments":previous_appointments}
-            return render (request,'receptionviewappointments.html',d)
+            return render(request,'receptionviewappointments.html',d)
 
 def appointment_detail(request, appointment_id):
     appointment = get_object_or_404(Appointment, pk=appointment_id)
